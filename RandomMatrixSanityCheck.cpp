@@ -1,5 +1,7 @@
 #include "RandomMatrixHash.h"
 #include "gtest/gtest.h"
+#include <set>
+#include <complex>
 
 using testing::Test;
 
@@ -13,6 +15,21 @@ using testing::Test;
 // threshold = ERROR_THRESHOLD to verify that each entry
 // of the matrix is 1 with probability 1/2
 TEST(RandomMatrixSanityCheck, EachBitFieldUniformlyGenerated) {
+  RandomMatrixHash randomMatrixHash RandomMatrixHash(NUM_TEST_CASES);
+
+  int row_length = sizeof(randomMatrixHash.matrix)/sizeof(randomMatrixHash[0][0]);
+  int column_length = sizeof(randomMatrixHash.matrix[0])/sizeof(randomMatrixHash[0][0]);
+
+  int total_number_of_ones = 0;
+  for( int i=0; i < row_length; a ++ ) {
+    for( int j=0; i < column_length; a ++ ) {
+      if (randomMatrixHash.matrix[i][j] == 1) {
+        total_number_of_ones++;
+      }
+    }
+  }
+  EXPECT_NEAR(total_number_of_ones/(row_length*column_length), 0.5, ERROR_THRESHOLD);
+  
 }
 
 // Sanity check for distribution of keys in the table.
@@ -22,6 +39,22 @@ TEST(RandomMatrixSanityCheck, EachBitFieldUniformlyGenerated) {
 // Then verify that hashing to each slot in the table is roughly equally
 // likely using EXPECT_NEAR(x, y, threshold) where threshold = ERROR_THRESHOLD
 TEST(RandomMatrixSanityCheck, SimpleUniformHashingAssumption) {
+  RandomMatrixHash randomMatrixHash = RandomMatrixHash(NUM_TEST_CASES);
+  std::set<int> keys_set = std::set<int>;
+
+  for (int i=0; i < NUM_TEST_CASES; i++) {
+    keys_set.insert(randomMatrixHash.Hash(i));
+  }
+
+  total_error = 0;
+  average_expected_number_of_hits = NUM_TEST_CASES / TABLE_SLOTS;
+  for (int i=0; i < NUM_TEST_CASES; i++) {
+    number_of_hits = keys_set.count(randomMatrixHash.Hash(i));
+    total_error += std::abs(number_of_hits - average_expected_number_of_hits);
+  }
+
+  average_error = total_error / TABLE_SLOTS;
+  ASSERT_LE(average_error, ERROR_THRESHOLD);
 }
 
 int main(int argc, char** argv) {
