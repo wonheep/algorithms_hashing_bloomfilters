@@ -6,67 +6,82 @@
 #include <bitset>
 #include <cstdlib>
 #include <random>
+#include <iostream>
 
 using namespace std;
 
-int randomgen(int max, int min) //Pass in range
-{
-	srand(time(NULL));  //Changed from rand(). srand() seeds rand for you.
-	int random = rand() % max + min;
-	return random;
-}
-
-// create random hash 
+// create random hash, constructor 
 RandomMatrixHash::RandomMatrixHash(unsigned int m) {
 	// table size = m
-
+	// unsigned int m = 4;
+  
 	// index is b bits long 
 	int b = log2(m);
 	int u = 5;
 
-	// b x u
-	int i, j;
+	// construct hash 
 	int matrix[b][u];
+	  
+	std::cout<< "b = " << b << "\n";
+	std::cout<< "u = " << u << "\n";
 
-	// fill b x u matrix with 0 or 1 
-	for (i = 0; i <= b; i++) 
-		for (j = 0; j <= u; j++)
-			int rand_b = rand() % 2;
-			int rand_u = rand() % 2;
-			matrix[i][j] = matrix[rand_b][rand_u];
-
-	//This will output the matrix
-	for (i = 0; i <= 7; i++)
-	    for (j = 0; j < = 7; j++)
-	           cout << matrix[i][j];
-	     cout << endl;
-
-	// keys are u bits long
-	// int u_min = -2147483648;
-	// int u_max = 2147483647;
-	// generate random u 
-	// std::random_device rd;
-	// std::mt19937 rng(rd());
-	// std::uniform_int_distribution<int> uni(u_min, u_max);
-	// int random_u = uni(rng);
-	// create b x u matrix indices and for each slot generate rand
-	// int n = rand() % 2
-	//int matrix[b][random_u];
+	int i, j;
+	for (i = 0; i < b; i++) {
+		std::cout<< "i = " << i << "\n";
+	    for (j = 0; j < u; j++) {
+	    	std::cout<< "j = " << j << "\n";
+	      
+	      	int rand_num = rand() % 2;
+	      	std::cout<< "rand_num = " << rand_num << "\n";
+	  
+	      	matrix[i][j] = rand_num;
+	      	std::cout<< "matrix["<<i<<"]"<<"["<<j<<"] = " << rand_num << "\n\n\n";
+	    }
+	}	
 }
 
 // calculate random hash 
 // Use mod 2 matrix multiplication for your hash function.
 size_t RandomMatrixHash::Hash(int key) const {
 
-	// keys are u bits long
-	int u = 
+	// turn integer to 32 bit binary 
+	char bin32[]  = "00000000000000000000000000000000";
+    for (int pos = 31; pos >= 0; --pos)
+    {
+        if (key % 2) 
+            bin32[key] = '1';
+        key /= 2;
+    }
+
+    //std::bitset<32> inbits(key);
+
+    int i, j;
+    int result[b];
+    for (i = 0; i <= b; i++) 
+		for (j = 0; j <= u; j++)
+			result[j] = (matrix[i][j]*bin32[j])%2
+
+	//This will output the matrix
+	for (i = 0; i <= b; i++)
+	    for (j = 0; j < = u; j++)
+	           cout << matrix[i][j];
+	     cout << endl;
+
+	int num, rem, temp, dec = 0, b = 1;
+    int temp = ;
+    while (num > 0)
+    {
+        rem = temp % 10;
+        dec = dec + rem * b;
+        b *= 2;
+        temp /= 10;
+    }
+    cout << "The decimal equivalent of " << num << " is " << dec;
+    return 0;
 
 	//convert key into bits
-	std::bitset<64> inbits(key);
-
-
-	std::cout << "key in binary is " << b << std::endl;
-
+	//std::bitset<32> inbits(key);
+	//std::cout << "key in binary is " << b << std::endl;
 	//get number of bits for that key
 	//set 2^b = m
 	//call RandomMatrixHash(m)
