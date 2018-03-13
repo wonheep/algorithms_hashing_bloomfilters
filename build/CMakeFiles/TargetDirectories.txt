@@ -1,0 +1,2 @@
+/home/wonheep/ecs122bp2/build/CMakeFiles/edit_cache.dir
+/home/wonheep/ecs122bp2/build/CMakeFiles/rebuild_cache.dir
