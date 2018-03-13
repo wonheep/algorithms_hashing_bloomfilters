@@ -1,0 +1,128 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{hyperref}
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+\newtheorem*{solution}{Solution}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Dept. of Computer Science, University of California, Davis\\ECS122b \hspace{.5in} Instructor: Rob Gysel \hspace{.5in} 3/7/18} % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Programming Assignment \#2\footnote{Last updated \today}\\Due date: 3/16/18 11:59pm \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{} % Put your name here
+
+\date{}
+
+\begin{document}
+\maketitle % Print the title
+\vspace{-3cm}
+
+Programs are to be submitted using \texttt{handin} by the due date; be sure your code compiles and works on the CSIF. If you are unfamiliar with \texttt{handin} or the CSIF, see \url{http://csifdocs.cs.ucdavis.edu/}. Use the command:
+
+\begin{verbatim}
+	handin rsgysel 122b-Program2 file1 file2 ... fileN
+\end{verbatim}
+
+You may work in groups of up to 2 people.
+Programs submitted up to 24 hours late will still be accepted but incur a 10\% grade penalty.
+
+\subsection*{Overview}
+In this project, you will:
+\begin{enumerate}
+	\item Implement the random matrix method for universal hashing.
+	\item Implement a Bloom filter.
+	\item Add basic building instructions to \texttt{CMakeLists.txt} for \texttt{CMake}.
+	\item Write sanity checks.
+\end{enumerate}
+
+The development environment is identical to that used for Project1.
+
+You do not need to create any files from scratch for this project.
+Your programming will consist of writing tests and implementing the body of pre-defined functions.
+
+Throughout this project, when you compile, do the following steps in your project's root directory\footnote{The root directory will have all of your .cpp, .h files etc.}.
+In the following commands, I assume you are starting in the root directory.
+\begin{enumerate}
+	\item Create a directory called \texttt{build} using \texttt{mkdir}, or change directory to \texttt{build} and delete its contents with \texttt{rm -r *}.
+	\item Run CMake in \texttt{build} with \texttt{CMake ..}
+	\item Run Make in \texttt{build} with \texttt{make} (any unit tests you have defined will execute during this stage.)
+\end{enumerate}
+
+\subsection*{References}
+The following are helpful references for this project.
+\begin{description}
+	\item[C++ Standard Library] \url{http://www.cplusplus.com/reference/} (has tutorials) and 
+	
+	\url{http://en.cppreference.com/w/} (terse)
+	\item[Google Test Documentation] This defines \texttt{EXPECT\_*} and \texttt{ASSERT\_*} macros that you must use for your tests.
+	
+	http://cheezyworld.com/wp-content/uploads/2010/12/PlainGoogleQuickTestReferenceGuide1.pdf
+	\item[CMake Documentation] You should not need to deep-dive into CMake. Instead, you should be able to copy and paste CMake code and make the appropriate changes where necessary (e.g. change which source files are used, target names, etc.). However, if you feel that you need a reference, refer to \url{https://cmake.org/documentation/}.
+\end{description}
+
+\subsection*{Part1: Universal Hashing}
+\begin{description}
+	\item[Files to modify:] \texttt{CMakeLists.txt}, \texttt{RandomMatrixHash.cpp}, \texttt{RandomMatrixHash.h}, 
+	
+	\texttt{RandomMatrixHashSanityCheck.cpp}
+	\item[Instructions:] 
+	
+	Complete the following steps, \textit{in this order}.
+		\begin{enumerate}
+			\item Complete the code in the \texttt{RandomMatrixHash.*} files to implement the random matrix hash functions. Assume that the universe of keys are the set of \texttt{int}s (i.e. everything integer in between \texttt{std::numeric\_limits<int>::min()} and \texttt{std::numeric\_limits<int>::max()}, inclusive). The constructor must take in \texttt{m}, the number of slots in the hash table.
+			\item Write the sanity checks in \texttt{RandomMatrixHashSanityCheck.cpp}. Be sure your sanity checks function with working code and break with non-working code. Note the macros defined at the top of the file: you must use these values for your tests, which are probabilistic in nature and have error thresholds.
+			\end{enumerate}
+\end{description}
+
+\subsection*{Part2: Bloom Filter}
+\begin{description}
+	\item[Files to modify:] \texttt{CMakeLists.txt}, \texttt{BloomFilter.cpp}, \texttt{BloomFilter.h}, 
+	
+	\texttt{BloomFilterSanityCheck.cpp}
+	\item[Instructions:] Complete the following steps, \textit{in this order}.
+		\begin{enumerate}
+			\item Complete the code in the \texttt{BloomFilter.*} files to implement a Bloom filter. The constructor must take in \texttt{m}, the number of bits used in the filter, and \texttt{expectedSetSize}, the size of the set inserted into the filter. Use these values to compute \texttt{k}, the optimal number of hash functions. Use the \texttt{RandomMatrixHash} class for your hash functions. 
+			\item Write the sanity checks in \texttt{RandomMatrixHashSanityCheck.cpp}. Be sure your sanity checks function with working code and break with non-working code. Note the macros defined at the top of the file: you must use these values for your tests, which are probabilistic in nature and have error thresholds.
+			\item Your sanity checks may occasionally fail for this section, which is fine. During grading we will re-run the sanity check a number of times to ensure that your sanity check generally passes.
+		\end{enumerate}
+\end{description}
+
+\end{document}
