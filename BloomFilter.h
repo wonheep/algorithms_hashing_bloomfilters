@@ -21,10 +21,10 @@ class BloomFilter {
   void Insert(std::set<int> S);
   bool Query(int x);
   std::string str() const; // This may not be necessary. Added for local machine debugging.
- private:
   int number_of_hash_functions;
   int number_of_bits_for_filter;
   std::vector<bool> bit_array;
+ private:
   std::vector<RandomMatrixHash> hash_functions_vector;
 };  // BloomFilter
 

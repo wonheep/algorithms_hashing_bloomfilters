@@ -14,11 +14,9 @@ class RandomMatrixHash {
     public:
         RandomMatrixHash(unsigned int m);
         size_t Hash(int key) const;
-
-    private:
- 	    std::vector<std::vector<int>> matrix;
  	    unsigned int num_rows;
  	    unsigned int num_columns;
+ 	    std::vector<std::vector<int>> matrix;
 
 }; // RandomMatrixHash
 

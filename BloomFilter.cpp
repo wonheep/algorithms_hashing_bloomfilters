@@ -60,19 +60,3 @@ std::string BloomFilter::str() const {
   }
   return output;
 }
-
-int main() {
-  std::hash<int> int_hash;
-  std::cout << "key in binary is " << std::endl;
-  int i = 5;
-  std::cout << "Hash " << i << " -> " << int_hash(i) << std::endl;
-  std::cout << "Hash " << 4 << " -> " << int_hash(4) << std::endl;
-  std::cout << "Hash " << 10 << " -> " << int_hash(10) << std::endl;
-
-  std::cout << (int)((double)(-1 * 10 * std::log(0.001)) / ((double)(std::log(2) * std::log(2)))) << std::endl;
-
-  // Bloom Filter
-  BloomFilter bloomFilter = BloomFilter(1, 10);
-  std::cout << bloomFilter.str() << std::endl;
-
-}

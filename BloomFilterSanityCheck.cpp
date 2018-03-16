@@ -23,9 +23,10 @@ TEST(BloomFilterSanityCheck, NoFalseNegatives) {
   }
 
   BloomFilter bloomFilter = BloomFilter(FILTER_SIZE, SET_SIZE);
-  bloomFilter.insert(elements);
-  for (int i=0; i < SET_SIZE; i++) {
-    ASSERT_EQ(bloomFilter.Query(elements[i]), true);
+  bloomFilter.Insert(elements);
+  std::set<int>::iterator iter;
+  for (iter = elements.begin(); iter != elements.end(); iter++) {
+    ASSERT_EQ(bloomFilter.Query(*iter), true);
   }
 }
 
@@ -36,14 +37,17 @@ TEST(BloomFilterSanityCheck, NoFalseNegatives) {
 // not in the set of added elements to approximate
 // the false positive rate.
 TEST(BloomFilterSanityCheck, FalsePositiveRate) {
-  std::vector<int> elements;
+  std::set<int> elements;
   for (int i=0; i < SET_SIZE; i++) {
-    elements.push_back(i);
+    elements.insert(i);
   }
 
-  failed = 0;
+  BloomFilter bloomFilter = BloomFilter(FILTER_SIZE, SET_SIZE);
+  bloomFilter.Insert(elements);
+
+  int failed = 0;
   for (int i=0; i < NUM_TEST_CASES; i++) {
-    if (!bloomFilter.Query(rand() % (NUM_TEST_CASES*NUM_TEST_CASES - SET_SIZE + 2) + SET_SIZE + 1)) {
+    if (!bloomFilter.Query(rand() % ((size_t)NUM_TEST_CASES * (size_t)NUM_TEST_CASES - SET_SIZE + 2) + SET_SIZE + 1)) {
       failed += 1;
     }
   }  
