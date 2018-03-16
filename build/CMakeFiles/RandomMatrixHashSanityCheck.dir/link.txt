@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/RandomMatrixHashSanityCheck.dir/RandomMatrixSanityCheck.cpp.o  -o RandomMatrixHashSanityCheck  -L/gtest/mybuild -rdynamic -lgtest -lpthread libRandomMatrixHashLib.a -Wl,-rpath,/gtest/mybuild 
