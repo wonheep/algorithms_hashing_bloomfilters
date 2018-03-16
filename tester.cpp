@@ -15,7 +15,7 @@ int main() {
   
   unsigned int u = 32;
   //int u = 32;
-  unsigned int m = 4;
+  unsigned int m = 8;
   
   // index is b bits long 
   unsigned int b = log2(m);
@@ -49,7 +49,7 @@ int main() {
   
   std::cout <<"\n********* Perform Hashing ********* \n\n";
   
-  int key = 100;
+  int key = -5;
 
   //to binary 
   std::string binary = std::bitset<32>(key).to_string(); 
@@ -84,10 +84,10 @@ int main() {
   int x, y;
   int val = 0;
   
-  size_t result[b];
+  int result[b];
   
   for (x = 0; x < b; x++) {
-    std::cout<< "x = " << x << "\n";
+    std::cout<< "\nx = " << x << "\n";
     for (y = 0; y < u; y++) {
       std::cout<< "y = " << y << "\n";
     
@@ -97,6 +97,17 @@ int main() {
     result[x] = val;
     std::cout << "result[" << x << "] = " << val << "\n\n\n";
   }
+  
+  // convert int array -> string for decimal conversion
+  string returnstring = "";
+  for (int temp = 0; temp < b; temp++)
+    returnstring += std::to_string(result[temp]);
+  
+  std::cout << "return string: " << returnstring << "\n";
+  
+  // decimal conversion
+  size_t key_index = std::bitset<32>(returnstring).to_ulong();
+  std::cout << "final value: " << key_index << std::endl;
   
   return 0;
 }

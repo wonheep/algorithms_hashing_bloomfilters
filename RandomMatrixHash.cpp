@@ -99,6 +99,16 @@ size_t RandomMatrixHash::Hash(int key) const {
 	    result[x] = val;
 	    std::cout << "result[" << x << "] = " << val << "\n\n\n";
 	  }
+	
+	// convert int array -> string for decimal conversion
+  	string returnstring = "";
+	for (int temp = 0; temp < b; temp++)
+		returnstring += std::to_string(result[temp]);
+	std::cout << "return string: " << returnstring << "\n";
 	  
-	return result;
+	// decimal conversion
+	size_t key_index = std::bitset<32>(returnstring).to_ulong();
+  	std::cout << "final value: " << key_index << std::endl;
+ 
+	return key_index;
 }
