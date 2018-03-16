@@ -1,0 +1,2 @@
+/usr/bin/ar qc libBloomFilterLib.a  CMakeFiles/BloomFilterLib.dir/BloomFilter.cpp.o CMakeFiles/BloomFilterLib.dir/RandomMatrixHash.cpp.o
+/usr/bin/ranlib libBloomFilterLib.a
