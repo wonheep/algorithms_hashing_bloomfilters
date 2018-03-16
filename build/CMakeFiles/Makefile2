@@ -137,8 +137,8 @@ clean: CMakeFiles/RandomMatrixHashLib.dir/clean
 # Target rules for target CMakeFiles/BloomFilterSanityCheck.dir
 
 # All Build rule for target.
-CMakeFiles/BloomFilterSanityCheck.dir/all: CMakeFiles/BloomFilterLib.dir/all
 CMakeFiles/BloomFilterSanityCheck.dir/all: CMakeFiles/RandomMatrixHashLib.dir/all
+CMakeFiles/BloomFilterSanityCheck.dir/all: CMakeFiles/BloomFilterLib.dir/all
 	$(MAKE) -f CMakeFiles/BloomFilterSanityCheck.dir/build.make CMakeFiles/BloomFilterSanityCheck.dir/depend
 	$(MAKE) -f CMakeFiles/BloomFilterSanityCheck.dir/build.make CMakeFiles/BloomFilterSanityCheck.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/arthur/Documents/algorithms_hashing_bloomfilters/build/CMakeFiles --progress-num=4,5 "Built target BloomFilterSanityCheck"

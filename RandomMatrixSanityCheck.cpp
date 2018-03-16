@@ -17,18 +17,19 @@ using testing::Test;
 TEST(RandomMatrixSanityCheck, EachBitFieldUniformlyGenerated) {
   RandomMatrixHash randomMatrixHash = RandomMatrixHash(NUM_TEST_CASES);
 
-  int row_length = (int)randomMatrixHash.num_rows;
-  int column_length = (int)randomMatrixHash.num_columns;
+  unsigned int row_length = randomMatrixHash.num_rows;
+  unsigned int column_length = randomMatrixHash.num_columns;
 
+  std::cout << "Checking number of ones" << std::endl;
   int total_number_of_ones = 0;
-  for( int i=0; i < row_length; i++ ) {
-    for( int j=0; i < column_length; j++ ) {
+  for( unsigned int i=0; i < row_length; i++ ) {
+    for( unsigned int j=0; j < column_length; j++ ) {
       if (randomMatrixHash.matrix[i][j] == 1) {
         total_number_of_ones++;
       }
     }
   }
-  EXPECT_NEAR(total_number_of_ones/(row_length*column_length), 0.5, ERROR_THRESHOLD);
+  EXPECT_NEAR((double)total_number_of_ones/(double)(row_length*column_length), 0.5, ERROR_THRESHOLD);
   
 }
 
@@ -46,14 +47,15 @@ TEST(RandomMatrixSanityCheck, SimpleUniformHashingAssumption) {
     keys_set.insert(randomMatrixHash.Hash(i));
   }
 
-  int total_error = 0;
-  double average_expected_number_of_hits = NUM_TEST_CASES / TABLE_SLOTS;
+  double total_error = 0;
+  double average_expected_number_of_hits = (double)NUM_TEST_CASES / (double)TABLE_SLOTS;
   for (int i=0; i < NUM_TEST_CASES; i++) {
     int number_of_hits = keys_set.count(randomMatrixHash.Hash(i));
-    total_error += std::abs(number_of_hits - average_expected_number_of_hits);
+    //std::cout << number_of_hits << std::endl;
+    total_error += std::abs((double)number_of_hits - (double)average_expected_number_of_hits);
   }
 
-  double average_error = total_error / TABLE_SLOTS;
+  double average_error = total_error / (double)TABLE_SLOTS;
   ASSERT_LE(average_error, ERROR_THRESHOLD);
 }
 

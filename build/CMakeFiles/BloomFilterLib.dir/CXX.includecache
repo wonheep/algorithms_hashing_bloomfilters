@@ -73,6 +73,8 @@ bits/stdc++.h
 -
 stdlib.h
 -
+time.h
+-
 
 /home/arthur/Documents/algorithms_hashing_bloomfilters/RandomMatrixHash.h
 math.h
