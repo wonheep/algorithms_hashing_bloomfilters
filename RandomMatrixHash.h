@@ -1,4 +1,3 @@
-#include
 #ifndef _RANDOM_MATRIX_HASH_H_
 #define _RANDOM_MATRIX_HASH_H_
 
