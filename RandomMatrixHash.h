@@ -1,13 +1,25 @@
 #ifndef _RANDOM_MATRIX_HASH_H_
 #define _RANDOM_MATRIX_HASH_H_
 
-class RandomMatrixHash {
- public:
-  RandomMatrixHash(unsigned int m);
-  size_t Hash(int key) const;
-  int matrix[][];
+#include <math.h>
+#include <stdio.h>
+#include <string>
+#include <iostream>
+#include <bitset>
+#include <cstdlib>
+#include <random>
+#include <set>
 
- private:
+class RandomMatrixHash {
+    public:
+        RandomMatrixHash(unsigned int m);
+        size_t Hash(int key) const;
+
+    private:
+ 	    std::vector<std::vector<int>> matrix;
+ 	    unsigned int num_rows;
+ 	    unsigned int num_columns;
+
 }; // RandomMatrixHash
 
 #endif  // _RANDOM_MATRIX_HASH_H_

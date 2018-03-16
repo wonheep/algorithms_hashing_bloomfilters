@@ -16,11 +16,18 @@ RandomMatrixHash::RandomMatrixHash(unsigned int m) {
 	// unsigned int m = 4;
   
 	// index is b bits long 
-	unsigned int b = log2(m);
-	unsigned int u = 32;
+	num_rows = log2(m);
+	num_columns = 32;
+
+	unsigned int b = num_rows;
+	unsigned int u = num_columns;
 
 	// construct hash 
-	int matrix[b][u];
+	std::vector<std::vector<int>> hash_functions_vector;
+	matrix.resize(b);
+	for (int i=0; i < b; i++) {
+		matrix[i].resize(u);
+	}
 	  
 	std::cout<< "b = " << b << "\n";
 	std::cout<< "u = " << u << "\n";
@@ -38,13 +45,16 @@ RandomMatrixHash::RandomMatrixHash(unsigned int m) {
 	      	std::cout<< "matrix["<<i<<"]"<<"["<<j<<"] = " << rand_num << "\n\n\n";
 	    }
 	}
-	return matrix;	
+
 }
 
 // calculate random hash 
 // Use mod 2 matrix multiplication for your hash function.
 size_t RandomMatrixHash::Hash(int key) const {
 	std::cout <<"\n********* Perform Hashing ********* \n\n";
+
+	unsigned int b = num_rows;
+	unsigned int u = num_columns;
 
 	//to binary 
 	std::string binary = std::bitset<32>(key).to_string(); 
