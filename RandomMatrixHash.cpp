@@ -38,7 +38,7 @@ RandomMatrixHash::RandomMatrixHash(unsigned int m) {
 	      	std::cout<< "matrix["<<i<<"]"<<"["<<j<<"] = " << rand_num << "\n\n\n";
 	    }
 	}
-	return 0;	
+	return matrix;	
 }
 
 // calculate random hash 
